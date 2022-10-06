@@ -9,14 +9,11 @@ import PIL
 from PIL import Image
 import concurrent.futures
 from aiogram import Bot, Dispatcher, executor, types
+from aiogram.dispatcher import Dispatcher
+from aiogram.utils.executor import start_webhook
 from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 
-API_TOKEN = ""
 
-logging.basicConfig(level=logging.INFO)
-
-bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
 
 def imagezz(seed):
 	random.seed(seed)
