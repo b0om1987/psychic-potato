@@ -9,6 +9,7 @@ import PIL
 from PIL import Image
 import concurrent.futures
 from aiogram import Bot, Dispatcher, executor, types
+from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 
 API_TOKEN = ""
 
@@ -82,4 +83,13 @@ async def echo(message: types.Message):
 		await message.answer('err: No input')
 
 if __name__ == '__main__':
-	executor.start_polling(dp, skip_updates=True)
+    logging.basicConfig(level=logging.INFO)
+    start_webhook(
+        dispatcher=dp,
+        webhook_path=WEBHOOK_PATH,
+        skip_updates=True,
+        on_startup=on_startup,
+        on_shutdown=on_shutdown,
+        host=WEBAPP_HOST,
+        port=WEBAPP_PORT,
+    )
