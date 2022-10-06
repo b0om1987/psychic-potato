@@ -10,7 +10,7 @@ from PIL import Image
 import concurrent.futures
 from aiogram import Bot, Dispatcher, executor, types
 
-API_TOKEN = "5580991208:AAE3a_B0HWZuq8Ti_wL8aqpGRJbt2kTjWBc"
+API_TOKEN = ""
 
 logging.basicConfig(level=logging.INFO)
 
