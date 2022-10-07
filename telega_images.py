@@ -32,7 +32,8 @@ def imagezz(seed):
 				(randint(fc[0]-40, fc[0]),
 				randint(fc[1]-40, fc[1]),
 				randint(fc[2]-40, fc[2]),
-				255))
+				255)
+				)
 				random.seed(randint(-999999, 999999))
 			if img.getpixel((temp1, temp2)) == (0, 255, 0, 255):
 				img.putpixel(
@@ -40,14 +41,24 @@ def imagezz(seed):
 				(randint(sc[0]-40, sc[0]),
 				randint(sc[1]-40, sc[1]),
 				randint(sc[2]-40, sc[2]),
-				255))
+				255)
+				)
 				random.seed(randint(-999999, 999999))
 	img = img.resize((1024, 1024), 0)
 	return img
 
+
+async def on_startup(dispatcher):
+    await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
+
+async def on_shutdown(dispatcher):
+    await bot.delete_webhook()
+
+
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
 	await message.reply("Hi!\nDescription of the bot here.")
+	
 
 @dp.message_handler(commands=['image', 'img'])
 async def image_parser(message: types.Message):
@@ -64,11 +75,13 @@ async def image_parser(message: types.Message):
 	result.save(bity, format='PNG')
 	bity = bity.getvalue()
 	await message.answer_photo(bity)
+	
 		
 @dp.message_handler(regexp='(^drink[s]?$|booze)')
 async def booze(message: types.Message):
 	with open('img/drinks/drink_' + str(randint(1, 31)) + '.jpeg', 'rb') as photo:
 		await message.reply_photo(photo, caption = 'Here ya go, ausie boy.')
+		
 		
 @dp.message_handler(commands=['echo'])
 async def echo(message: types.Message):
@@ -78,6 +91,7 @@ async def echo(message: types.Message):
 		await message.delete()
 	else:
 		await message.answer('err: No input')
+		
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
