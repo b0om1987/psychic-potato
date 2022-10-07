@@ -1,9 +1,9 @@
 import logging
 from random import randint
 import random
-import asyncio
 import os
 import io
+import asyncio
 from time import sleep
 import PIL
 from PIL import Image
