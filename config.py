@@ -10,7 +10,7 @@ ADAPTABLE_APP_NAME = os.getenv('EXTERNAL_URL')
 
 # webhook settings
 WEBHOOK_HOST = f'{ADAPTABLE_APP_NAME}'
-WEBHOOK_PATH = f'/webhook/{TOKEN}'
+WEBHOOK_PATH = f'/webhook/'
 WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
 
 # webserver settings
