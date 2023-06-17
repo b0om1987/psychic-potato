@@ -12,6 +12,7 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
 from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
+from background import keep_alive
 
 
 
@@ -104,3 +105,4 @@ if __name__ == '__main__':
         host=WEBAPP_HOST,
         port=WEBAPP_PORT,
     )
+    keep_alive()
