@@ -25,14 +25,14 @@ app = Flask('')
 
 @app.route('/')
 def home():
-  return "Sup, homie"
+	return "Sup, homie"
 
-def run():
-  app.run(host = '0.0.0.0', port = os.getenv('PORT', default=3000))
+def runsite():
+	app.run(host = '0.0.0.0', port = os.getenv('PORT', default=3000))
 
 def keep_alive():
-  t = Thread(target=run)
-  t.start()
+	t = Thread(target=run)
+	t.start()
 
 
 
@@ -70,10 +70,10 @@ def imagezz(seed):
 
 
 async def on_startup(dispatcher):
-    await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
+	await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
 
 async def on_shutdown(dispatcher):
-    await bot.delete_webhook()
+	await bot.delete_webhook()
 
 
 @dp.message_handler(commands=['start', 'help'])
@@ -115,14 +115,15 @@ async def echo(message: types.Message):
 		
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    start_webhook(
-        dispatcher=dp,
-        webhook_path=WEBHOOK_PATH,
-        skip_updates=True,
-        on_startup=on_startup,
-        on_shutdown=on_shutdown,
-        host=WEBAPP_HOST,
-        port=WEBAPP_PORT,
-    )
-    keep_alive()
+	logging.basicConfig(level=logging.INFO)
+	runsite()
+	keep_alive()
+	start_webhook(
+		dispatcher=dp,
+		webhook_path=WEBHOOK_PATH,
+		skip_updates=True,
+		on_startup=on_startup,
+		on_shutdown=on_shutdown,
+		host=WEBAPP_HOST,
+		port=WEBAPP_PORT,
+		)
