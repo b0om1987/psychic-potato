@@ -16,8 +16,6 @@ from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 from flask import Flask
 from flask import request
 from threading import Thread
-import time
-import requests
 
 
 
