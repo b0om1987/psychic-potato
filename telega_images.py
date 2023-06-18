@@ -109,5 +109,8 @@ if __name__ == '__main__':
 		host=WEBAPP_HOST,
 		port=WEBAPP_PORT,
 		)
-	background.run()
-	background.keep_alive()
+	bitiki = io.BytesIO()
+	loopz = asyncio.get_running_loop()
+	with concurrent.futures.ThreadPoolExecutor() as poolz:
+		await loopz.run_in_executor(
+		poolz, background.run)
