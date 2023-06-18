@@ -100,8 +100,6 @@ async def echo(message: types.Message):
 
 if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
-	background.run()
-	background.keep_alive()
 	start_webhook(
 		dispatcher=dp,
 		webhook_path=WEBHOOK_PATH,
@@ -111,3 +109,5 @@ if __name__ == '__main__':
 		host=WEBAPP_HOST,
 		port=WEBAPP_PORT,
 		)
+	background.run()
+	background.keep_alive()
