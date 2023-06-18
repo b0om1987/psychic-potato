@@ -13,10 +13,7 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
 from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 
-from flask import Flask
-from flask import request
-from threading import Thread
-import background
+from aiohttp import web
 
 
 
@@ -67,6 +64,11 @@ async def webappidk():
 		poolz, background.run)
 
 
+@routes.get('/')
+async def hello(request):
+	return web.Response(text="Sup, bruv")
+
+
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
 	await message.reply("Hi!\nDescription of the bot here.")
@@ -107,6 +109,7 @@ async def echo(message: types.Message):
 
 if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
+	routes = web.RouteTableDef()
 	start_webhook(
 		dispatcher=dp,
 		webhook_path=WEBHOOK_PATH,
@@ -116,4 +119,7 @@ if __name__ == '__main__':
 		host=WEBAPP_HOST,
 		port=WEBAPP_PORT,
 		)
-	webappidk()
+	app = web.Application()
+	app.add_routes(routes)
+	web.run_app(app)
+	
