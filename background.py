@@ -12,7 +12,7 @@ def home():
   return "Sup, homie"
 
 def run():
-  app.run(host = '0.0.0.0', port = os.getenv('PORT', default=3000))
+  app.run(host = '0.0.0.0', port = 3000)
 
 def keep_alive():
   t = Thread(target=run)
