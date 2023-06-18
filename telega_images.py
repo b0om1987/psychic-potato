@@ -51,6 +51,7 @@ def imagezz(seed):
 
 async def on_startup(dispatcher):
 	await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
+	keep_alive()
 
 async def on_shutdown(dispatcher):
 	await bot.delete_webhook()
@@ -97,7 +98,6 @@ async def echo(message: types.Message):
 
 if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
-	keep_alive()
 	start_webhook(
 		dispatcher=dp,
 		webhook_path=WEBHOOK_PATH,
