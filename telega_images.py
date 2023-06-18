@@ -16,21 +16,7 @@ from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 from flask import Flask
 from flask import request
 from threading import Thread
-
-
-
-app = Flask('')
-
-@app.route('/')
-def home():
-	return "Sup, homie"
-
-def runsite():
-	app.run(host = '0.0.0.0', port = os.getenv('PORT', default=3000))
-
-def keep_alive():
-	t = Thread(target=run)
-	t.start()
+import background
 
 
 
@@ -114,8 +100,6 @@ async def echo(message: types.Message):
 
 if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
-	runsite()
-	keep_alive()
 	start_webhook(
 		dispatcher=dp,
 		webhook_path=WEBHOOK_PATH,
