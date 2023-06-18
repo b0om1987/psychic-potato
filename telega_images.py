@@ -56,18 +56,6 @@ async def on_startup(dispatcher):
 async def on_shutdown(dispatcher):
 	await bot.delete_webhook()
 
-async def webappidk():
-	bitiki = io.BytesIO()
-	loopz = asyncio.get_running_loop()
-	with concurrent.futures.ThreadPoolExecutor() as poolz:
-		await loopz.run_in_executor(
-		poolz, background.run)
-
-
-@routes.get('/')
-async def hello(request):
-	return web.Response(text="Sup, bruv")
-
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
@@ -105,11 +93,21 @@ async def echo(message: types.Message):
 		await message.delete()
 	else:
 		await message.answer('err: No input')
+
+
+routes = web.RouteTableDef()
+
+@routes.get('/')
+async def home(request):
+	return web.Response(text="Sup, bruv")
+
+@routes.get('/webhook')
+async def telegramzzz(request):
+	return web.Response(text="webhook_active")
 		
 
 if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
-	routes = web.RouteTableDef()
 	start_webhook(
 		dispatcher=dp,
 		webhook_path=WEBHOOK_PATH,
