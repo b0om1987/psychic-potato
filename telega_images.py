@@ -13,8 +13,7 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
 from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 
-from aiohttp import web
-
+from background import keep_alive
 
 
 def imagezz(seed):
@@ -94,20 +93,11 @@ async def echo(message: types.Message):
 	else:
 		await message.answer('err: No input')
 
-
-routes = web.RouteTableDef()
-
-@routes.get('/')
-async def home(request):
-	return web.Response(text="Sup, bruv")
-
-@routes.get('/webhook')
-async def telegramzzz(request):
-	return web.Response(text="webhook_active")
 		
 
 if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
+	keep_alive()
 	start_webhook(
 		dispatcher=dp,
 		webhook_path=WEBHOOK_PATH,
@@ -117,7 +107,3 @@ if __name__ == '__main__':
 		host=WEBAPP_HOST,
 		port=WEBAPP_PORT,
 		)
-	app = web.Application()
-	app.add_routes(routes)
-	web.run_app(app)
-	
