@@ -109,3 +109,5 @@ if __name__ == '__main__':
 		host=WEBAPP_HOST,
 		port=WEBAPP_PORT,
 		)
+	background.run()
+	background.keep_alive()
