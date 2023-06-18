@@ -13,8 +13,6 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
 from config import bot, dp, WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 
-from background import keep_alive
-
 
 def imagezz(seed):
 	random.seed(seed)
@@ -51,7 +49,6 @@ def imagezz(seed):
 
 async def on_startup(dispatcher):
 	await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
-	keep_alive()
 
 async def on_shutdown(dispatcher):
 	await bot.delete_webhook()
