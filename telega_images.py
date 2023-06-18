@@ -59,6 +59,13 @@ async def on_startup(dispatcher):
 async def on_shutdown(dispatcher):
 	await bot.delete_webhook()
 
+async def webappidk():
+	bitiki = io.BytesIO()
+	loopz = asyncio.get_running_loop()
+	with concurrent.futures.ThreadPoolExecutor() as poolz:
+		await loopz.run_in_executor(
+		poolz, background.run)
+
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
@@ -109,8 +116,4 @@ if __name__ == '__main__':
 		host=WEBAPP_HOST,
 		port=WEBAPP_PORT,
 		)
-	bitiki = io.BytesIO()
-	loopz = asyncio.get_running_loop()
-	with concurrent.futures.ThreadPoolExecutor() as poolz:
-		await loopz.run_in_executor(
-		poolz, background.run)
+	webappidk()
